@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If data.js is not loaded or doesn't define the necessary operations,
     // we fallback to a fully functional localStorage implementation so that the
     // UI remains completely interactive and testable on its own.
-    const mockDataKey = 'expense_tracker_mock_data';
+    const mockDataKey = 'personal_expense_tracker_expenses';
 
     const getMockExpenses = () => {
         const data = localStorage.getItem(mockDataKey);
@@ -37,15 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Error parsing mock expenses data:", e);
             }
         }
-        // Seed initial mock data if empty
-        const initialSeed = [
-            { id: 'mock-1', amount: 120, category: '飲食', note: '香雞排與大杯珍奶', date: getFormattedDate(0) },
-            { id: 'mock-2', amount: 350, category: '娛樂', note: '威秀影城電影票', date: getFormattedDate(-1) },
-            { id: 'mock-3', amount: 80, category: '交通', note: '捷運加值', date: getFormattedDate(-2) },
-            { id: 'mock-4', amount: 1590, category: '購物', note: '運動鞋', date: getFormattedDate(-3) }
-        ];
-        localStorage.setItem(mockDataKey, JSON.stringify(initialSeed));
-        return initialSeed;
+        return [];
     };
 
     const saveMockExpenses = (expenses) => {
