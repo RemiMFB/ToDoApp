@@ -1,0 +1,1106 @@
+/* ==========================================================================
+   Personal Expense Tracker - Modern Stylesheet (style.css)
+   ========================================================================== */
+
+:root {
+    /* Primary Color Palette (Indigo Theme) */
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-light: #e0e7ff;
+    --primary-glow: rgba(99, 102, 241, 0.15);
+    
+    --secondary: #0ea5e9;
+    --secondary-light: #e0f2fe;
+    
+    --success: #10b981;
+    --success-light: #d1fae5;
+    
+    --danger: #f43f5e;
+    --danger-hover: #e11d48;
+    --danger-light: #ffe4e6;
+
+    --warning: #f59e0b;
+    
+    /* Category Accent Colors */
+    --color-food: #f97316;
+    --color-food-bg: #ffedd5;
+    --color-transport: #0ea5e9;
+    --color-transport-bg: #e0f2fe;
+    --color-entertainment: #d946ef;
+    --color-entertainment-bg: #fdf4ff;
+    --color-shopping: #10b981;
+    --color-shopping-bg: #d1fae5;
+    --color-others: #64748b;
+    --color-others-bg: #f1f5f9;
+
+    /* Theme Layout & Neutrals */
+    --bg-app: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --border-card: rgba(226, 232, 240, 0.8);
+    --border-focus: #818cf8;
+
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #94a3b8;
+
+    /* Elevation & Soft Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(99, 102, 241, 0.04), 0 4px 6px -4px rgba(99, 102, 241, 0.04);
+    --shadow-premium: 0 20px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+
+    /* Rounded Borders */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --radius-pill: 9999px;
+
+    /* Fonts definition */
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Smooth Transitions */
+    --transition-all: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================================================
+   Base & Reset Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    overflow-y: scroll;
+    position: relative;
+}
+
+/* Decorative Background Blobs for Glassmorphism Context */
+.bg-blob {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+    animation: drift 25s infinite alternate ease-in-out;
+}
+
+.blob-indigo {
+    background: radial-gradient(circle, var(--primary) 0%, #818cf8 100%);
+    top: -15%;
+    left: -15%;
+}
+
+.blob-pink {
+    background: radial-gradient(circle, #f472b6 0%, #db2777 100%);
+    bottom: -15%;
+    right: -15%;
+    animation-delay: -7s;
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50% { transform: translate(60px, -40px) scale(1.15) rotate(90deg); }
+    100% { transform: translate(-40px, 60px) scale(0.9) rotate(180deg); }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.5);
+}
+
+/* ==========================================================================
+   Application Layout Container
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ==========================================================================
+   Header Styles
+   ========================================================================== */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-icon-bg {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px var(--primary-glow);
+    color: white;
+}
+
+.logo-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.logo-text h1 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.logo-sub {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+}
+
+.header-decor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-sm);
+}
+
+.decor-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--success);
+    position: relative;
+}
+
+.decor-dot::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background-color: var(--success);
+    animation: ping 1.5s infinite;
+}
+
+@keyframes ping {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+.decor-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Main Grid Layout
+   ========================================================================== */
+.app-main {
+    display: grid;
+    grid-template-columns: 430px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Left panel wrapper */
+.dashboard-and-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ==========================================================================
+   Reusable Premium Card Layout (Glassmorphism)
+   ========================================================================== */
+.card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
+    padding: 30px;
+    transition: var(--transition-all);
+}
+
+.card:hover {
+    box-shadow: 0 25px 35px -5px rgba(15, 23, 42, 0.08), 0 10px 15px -6px rgba(15, 23, 42, 0.08);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    padding-bottom: 16px;
+}
+
+.card-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.header-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+
+/* ==========================================================================
+   Monthly Total Dashboard Card
+   ========================================================================== */
+.card-total {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(79, 70, 229, 0.95) 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-total::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    top: -50px;
+    right: -50px;
+    border-radius: 50%;
+}
+
+.card-total-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.total-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.label-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.period-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card-total-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.currency-symbol {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.total-value {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -1px;
+    word-break: break-all;
+}
+
+.card-total-footer {
+    display: flex;
+    align-items: center;
+}
+
+.footer-trend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.trend-icon {
+    width: 14px;
+    height: 14px;
+}
+
+/* ==========================================================================
+   Form Styling (Input & Controls)
+   ========================================================================== */
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.required {
+    color: var(--danger);
+    margin-left: 2px;
+}
+
+/* Premium Input Wrapper */
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(203, 213, 225, 0.8);
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+    overflow: hidden;
+}
+
+.input-container:hover {
+    border-color: #cbd5e1;
+    background-color: white;
+}
+
+.input-container:focus-within {
+    border-color: var(--border-focus);
+    background-color: white;
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.input-container input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.input-container input::placeholder {
+    color: var(--text-light);
+}
+
+/* Specific Prefix layout (Amount Field) */
+.prefix-container input {
+    padding-left: 8px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+.input-prefix {
+    padding-left: 16px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    user-select: none;
+}
+
+/* Icon Prefix Layout (Date & Note Fields) */
+.icon-container input {
+    padding-left: 10px;
+}
+
+.input-icon-left {
+    padding-left: 16px;
+    width: 36px;
+    height: 18px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Date input specific adjustments */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+/* Validation styling */
+.form-row.error .input-container {
+    border-color: var(--danger);
+    background-color: rgba(254, 226, 226, 0.2);
+}
+
+.form-row.error .input-container:focus-within {
+    box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.15);
+}
+
+.validation-message {
+    display: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--danger);
+    margin-top: 2px;
+    padding-left: 4px;
+    animation: slideDown 0.2s ease-out;
+}
+
+.form-row.error .validation-message {
+    display: block;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Category Selection Grid (Radio Buttons)
+   ========================================================================== */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.category-pill-label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.category-pill-label input[type="radio"] {
+    display: none; /* Hide real radio input */
+}
+
+/* Category Pill Styling */
+.category-pill-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    transition: var(--transition-bounce);
+}
+
+.category-pill-btn span {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.category-pill-icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.2px;
+    transition: var(--transition-bounce);
+}
+
+/* Hover effects */
+.category-pill-label:hover .category-pill-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Active / Checked pill styles using :has() for elegant CSS flow */
+.category-pill-label:has(input:checked) .category-pill-btn {
+    transform: scale(0.95);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.category-pill-label:has(input:checked) .category-pill-btn[data-color="飲食"] {
+    background-color: var(--color-food-bg);
+    border-color: rgba(249, 115, 22, 0.3);
+    color: var(--color-food);
+}
+.category-pill-label:has(input:checked) .category-pill-btn[data-color="交通"] {
+    background-color: var(--color-transport-bg);
+    border-color: rgba(14, 165, 233, 0.3);
+    color: var(--color-transport);
+}
+.category-pill-label:has(input:checked) .category-pill-btn[data-color="娛樂"] {
+    background-color: var(--color-entertainment-bg);
+    border-color: rgba(217, 70, 239, 0.3);
+    color: var(--color-entertainment);
+}
+.category-pill-label:has(input:checked) .category-pill-btn[data-color="購物"] {
+    background-color: var(--color-shopping-bg);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--color-shopping);
+}
+.category-pill-label:has(input:checked) .category-pill-btn[data-color="其它"] {
+    background-color: var(--color-others-bg);
+    border-color: rgba(100, 116, 139, 0.3);
+    color: var(--color-others);
+}
+
+/* Fallback JS compatibility class in case :has isn't supported */
+.category-pill-label.js-active .category-pill-btn[data-color="飲食"] {
+    background-color: var(--color-food-bg); border-color: rgba(249, 115, 22, 0.3); color: var(--color-food);
+}
+.category-pill-label.js-active .category-pill-btn[data-color="交通"] {
+    background-color: var(--color-transport-bg); border-color: rgba(14, 165, 233, 0.3); color: var(--color-transport);
+}
+.category-pill-label.js-active .category-pill-btn[data-color="娛樂"] {
+    background-color: var(--color-entertainment-bg); border-color: rgba(217, 70, 239, 0.3); color: var(--color-entertainment);
+}
+.category-pill-label.js-active .category-pill-btn[data-color="購物"] {
+    background-color: var(--color-shopping-bg); border-color: rgba(16, 185, 129, 0.3); color: var(--color-shopping);
+}
+.category-pill-label.js-active .category-pill-btn[data-color="其它"] {
+    background-color: var(--color-others-bg); border-color: rgba(100, 116, 139, 0.3); color: var(--color-others);
+}
+
+/* Form Action Buttons */
+.btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--primary-glow);
+    transition: var(--transition-bounce);
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+    opacity: 0.95;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* ==========================================================================
+   Records Card (List Section)
+   ========================================================================== */
+.records-section {
+    height: 100%;
+}
+
+.card-records {
+    display: flex;
+    flex-direction: column;
+    max-height: 820px;
+    height: 100%;
+}
+
+.records-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.records-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.title-with-icon h2 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.badge {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+}
+
+/* Filter controls dropdown styling */
+.filter-controls {
+    display: flex;
+    align-items: center;
+}
+
+.select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.select-icon-left {
+    position: absolute;
+    left: 12px;
+    width: 14px;
+    height: 14px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.filter-select {
+    padding: 8px 16px 8px 34px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-card);
+    background-color: white;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition-all);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px;
+    padding-right: 32px;
+}
+
+.filter-select:hover {
+    border-color: #cbd5e1;
+    color: var(--text-main);
+}
+
+.filter-select:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* List Body Wrapper & List Container */
+.records-body {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.records-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ==========================================================================
+   List Item Details & Categories Badge Styling
+   ========================================================================== */
+.record-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background-color: white;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+    animation: enterFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes enterFade {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.record-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.2);
+    box-shadow: var(--shadow-md);
+}
+
+.record-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0; /* Ensures notes truncate nicely on small screens */
+}
+
+/* Circular Category Icon wrapper */
+.category-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.category-icon-wrapper i {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.2px;
+}
+
+/* Color definitions mapped to category items */
+.record-item[data-category="飲食"] .category-icon-wrapper {
+    background-color: var(--color-food-bg); color: var(--color-food);
+}
+.record-item[data-category="交通"] .category-icon-wrapper {
+    background-color: var(--color-transport-bg); color: var(--color-transport);
+}
+.record-item[data-category="娛樂"] .category-icon-wrapper {
+    background-color: var(--color-entertainment-bg); color: var(--color-entertainment);
+}
+.record-item[data-category="購物"] .category-icon-wrapper {
+    background-color: var(--color-shopping-bg); color: var(--color-shopping);
+}
+.record-item[data-category="其它"] .category-icon-wrapper {
+    background-color: var(--color-others-bg); color: var(--color-others);
+}
+
+/* Text groups containing note and date */
+.record-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.record-note {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.record-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.record-badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+/* Category badge tags style */
+.record-item[data-category="飲食"] .record-badge { background-color: var(--color-food-bg); color: var(--color-food); }
+.record-item[data-category="交通"] .record-badge { background-color: var(--color-transport-bg); color: var(--color-transport); }
+.record-item[data-category="娛樂"] .record-badge { background-color: var(--color-entertainment-bg); color: var(--color-entertainment); }
+.record-item[data-category="購物"] .record-badge { background-color: var(--color-shopping-bg); color: var(--color-shopping); }
+.record-item[data-category="其它"] .record-badge { background-color: var(--color-others-bg); color: var(--color-others); }
+
+/* Right action panel of the list item */
+.record-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 16px;
+}
+
+.record-amount {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Actions: Delete Button */
+.btn-delete {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-all);
+    opacity: 0.6;
+}
+
+.btn-delete:hover {
+    background-color: var(--danger-light);
+    color: var(--danger);
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.btn-delete i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Exit slide animation for deletion */
+.record-item.animate-delete {
+    animation: exitFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes exitFade {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(40px) scale(0.95);
+        height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        border: none;
+    }
+}
+
+/* ==========================================================================
+   Empty State Element styling
+   ========================================================================== */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    flex: 1;
+}
+
+.empty-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.empty-icon {
+    width: 36px;
+    height: 36px;
+    stroke-width: 1.8px;
+}
+
+.empty-state h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.empty-description {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Media Queries & Responsiveness
+   ========================================================================== */
+@media (max-width: 960px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .app-container {
+        gap: 20px;
+    }
+
+    .app-main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-records {
+        max-height: none; /* Let height auto flow */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-logo {
+        gap: 12px;
+    }
+
+    .logo-icon-bg {
+        width: 42px;
+        height: 42px;
+    }
+
+    .logo-text h1 {
+        font-size: 1.25rem;
+    }
+
+    .header-decor {
+        padding: 4px 10px;
+    }
+
+    .decor-status {
+        display: none; /* Hide textual status label on tiny screens */
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+    }
+
+    .category-pill-btn {
+        padding: 8px 2px;
+    }
+
+    .category-pill-btn span {
+        font-size: 0.65rem;
+    }
+
+    .category-pill-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .record-item {
+        padding: 10px 12px;
+    }
+
+    .category-icon-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+
+    .category-icon-wrapper i {
+        width: 16px;
+        height: 16px;
+    }
+
+    .record-note {
+        font-size: 0.85rem;
+    }
+
+    .record-amount {
+        font-size: 1rem;
+    }
+}

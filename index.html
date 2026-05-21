@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人記帳本 | Personal Expense Tracker</title>
+    <!-- Fonts: Inter for reading, Outfit for branding/numbers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glassmorphic Blobs -->
+    <div class="bg-blob blob-indigo"></div>
+    <div class="bg-blob blob-pink"></div>
+
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-logo">
+                <div class="logo-icon-bg">
+                    <i data-lucide="wallet" class="logo-icon"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>個人記帳本</h1>
+                    <span class="logo-sub">Personal Expense Tracker</span>
+                </div>
+            </div>
+            <div class="header-decor">
+                <span class="decor-dot"></span>
+                <span class="decor-status">已連線</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="app-main">
+            <!-- Left Grid: Dashboard and Input Form -->
+            <section class="dashboard-and-form">
+                
+                <!-- Total Amount Card -->
+                <div class="card card-total">
+                    <div class="card-total-header">
+                        <div class="total-label">
+                            <i data-lucide="calendar-days" class="label-icon"></i>
+                            <span>本月總支出</span>
+                        </div>
+                        <span class="period-badge" id="current-month-badge">-- 年 -- 月</span>
+                    </div>
+                    <div class="card-total-amount">
+                        <span class="currency-symbol">NT$</span>
+                        <span id="monthly-total-value" class="total-value">0</span>
+                    </div>
+                    <div class="card-total-footer">
+                        <div class="footer-trend positive">
+                            <i data-lucide="sparkles" class="trend-icon"></i>
+                            <span>掌握收支，實現財務自由</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Transaction Form -->
+                <div class="card card-form">
+                    <div class="card-header">
+                        <i data-lucide="plus-circle" class="header-icon text-primary"></i>
+                        <h2>新增記帳</h2>
+                    </div>
+
+                    <form id="expense-form" class="expense-form" novalidate>
+                        <!-- Amount Input -->
+                        <div class="form-row">
+                            <label for="expense-amount" class="form-label">支出金額 <span class="required">*</span></label>
+                            <div class="input-container prefix-container">
+                                <span class="input-prefix">NT$</span>
+                                <input type="number" id="expense-amount" name="amount" placeholder="0" min="1" step="any" required autocomplete="off">
+                            </div>
+                            <div class="validation-message" id="amount-validation-msg">請輸入大於 0 的金額</div>
+                        </div>
+
+                        <!-- Category Selector Grid -->
+                        <div class="form-row">
+                            <label class="form-label">支出類別 <span class="required">*</span></label>
+                            <div class="category-grid">
+                                <label class="category-pill-label">
+                                    <input type="radio" name="category" value="飲食" checked>
+                                    <div class="category-pill-btn" data-color="飲食">
+                                        <i data-lucide="utensils-2" class="category-pill-icon"></i>
+                                        <span>飲食</span>
+                                    </div>
+                                </label>
+                                <label class="category-pill-label">
+                                    <input type="radio" name="category" value="交通">
+                                    <div class="category-pill-btn" data-color="交通">
+                                        <i data-lucide="car" class="category-pill-icon"></i>
+                                        <span>交通</span>
+                                    </div>
+                                </label>
+                                <label class="category-pill-label">
+                                    <input type="radio" name="category" value="娛樂">
+                                    <div class="category-pill-btn" data-color="娛樂">
+                                        <i data-lucide="gamepad-2" class="category-pill-icon"></i>
+                                        <span>娛樂</span>
+                                    </div>
+                                </label>
+                                <label class="category-pill-label">
+                                    <input type="radio" name="category" value="購物">
+                                    <div class="category-pill-btn" data-color="購物">
+                                        <i data-lucide="shopping-bag" class="category-pill-icon"></i>
+                                        <span>購物</span>
+                                    </div>
+                                </label>
+                                <label class="category-pill-label">
+                                    <input type="radio" name="category" value="其它">
+                                    <div class="category-pill-btn" data-color="其它">
+                                        <i data-lucide="more-horizontal" class="category-pill-icon"></i>
+                                        <span>其它</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Date Picker -->
+                        <div class="form-row">
+                            <label for="expense-date" class="form-label">交易日期 <span class="required">*</span></label>
+                            <div class="input-container icon-container">
+                                <i data-lucide="calendar" class="input-icon-left"></i>
+                                <input type="date" id="expense-date" name="date" required>
+                            </div>
+                            <div class="validation-message" id="date-validation-msg">請選擇日期</div>
+                        </div>
+
+                        <!-- Note Field -->
+                        <div class="form-row">
+                            <label for="expense-note" class="form-label">備註說明</label>
+                            <div class="input-container icon-container">
+                                <i data-lucide="file-text" class="input-icon-left"></i>
+                                <input type="text" id="expense-note" name="note" placeholder="例如：午餐牛肉麵、計程車..." autocomplete="off">
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-submit">
+                            <i data-lucide="send" class="btn-icon"></i>
+                            <span>記錄這筆支出</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right Grid: Expense Records List -->
+            <section class="records-section">
+                <div class="card card-records">
+                    <!-- Records Header & Filter -->
+                    <div class="records-header">
+                        <div class="records-title-group">
+                            <div class="title-with-icon">
+                                <i data-lucide="scroll-text" class="header-icon text-secondary"></i>
+                                <h2>支出明細</h2>
+                            </div>
+                            <span class="badge" id="record-count">0 筆</span>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="select-wrapper">
+                                <i data-lucide="filter" class="select-icon-left"></i>
+                                <select id="category-filter" class="filter-select">
+                                    <option value="全部">全部類別</option>
+                                    <option value="飲食">飲食</option>
+                                    <option value="交通">交通</option>
+                                    <option value="娛樂">娛樂</option>
+                                    <option value="購物">購物</option>
+                                    <option value="其它">其它</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Records List Body -->
+                    <div class="records-body">
+                        <ul id="records-list" class="records-list">
+                            <!-- Populated dynamically via JS -->
+                        </ul>
+
+                        <!-- Empty State Illustration/Fallback -->
+                        <div id="empty-state" class="empty-state">
+                            <div class="empty-icon-wrapper">
+                                <i data-lucide="piggy-bank" class="empty-icon"></i>
+                            </div>
+                            <h3>尚無記帳紀錄</h3>
+                            <p class="empty-description">這代表你本月還沒有登錄任何開銷喔！立即在左側輸入表單，開啟記帳習慣吧。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts: data.js (Data Logic) and app.js (UI Logic) -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
