@@ -1,0 +1,22 @@
+# 忽略所有暫存目錄
+.agents/
+
+# 忽略所有產出的 Word 報告與文件，避免上傳論文機密或佔用空間
+*.docx
+# 若有需要將特定版控範本保留，請使用 !範本.docx 排除
+
+# 忽略轉換過程中的 PDF
+*.pdf
+
+# 忽略中介的 markdown 或 text 檔案
+*.md
+!README.md
+!remi.md
+!SKILL.md
+*.txt
+
+# Python 相關暫存
+__pycache__/
+*.pyc
+.venv/
+.env
