@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,15 @@
     <!-- Fonts: Inter for reading, Outfit for branding/numbers -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Background Glassmorphic Blobs -->
     <div class="bg-blob blob-indigo"></div>
@@ -40,7 +44,7 @@
         <main class="app-main">
             <!-- Left Grid: Dashboard and Input Form -->
             <section class="dashboard-and-form">
-                
+
                 <!-- Total Amount Card -->
                 <div class="card card-total">
                     <div class="card-total-header">
@@ -57,7 +61,7 @@
                     <div class="card-total-footer">
                         <div class="footer-trend positive">
                             <i data-lucide="sparkles" class="trend-icon"></i>
-                            <span>掌握收支，實現財務自由</span>
+                            <span>掌握收支數目，實現財務自由</span>
                         </div>
                     </div>
                 </div>
@@ -75,7 +79,8 @@
                             <label for="expense-amount" class="form-label">支出金額 <span class="required">*</span></label>
                             <div class="input-container prefix-container">
                                 <span class="input-prefix">NT$</span>
-                                <input type="number" id="expense-amount" name="amount" placeholder="0" min="1" step="any" required autocomplete="off">
+                                <input type="number" id="expense-amount" name="amount" placeholder="0" min="1"
+                                    step="any" required autocomplete="off">
                             </div>
                             <div class="validation-message" id="amount-validation-msg">請輸入大於 0 的金額</div>
                         </div>
@@ -137,7 +142,8 @@
                             <label for="expense-note" class="form-label">備註說明</label>
                             <div class="input-container icon-container">
                                 <i data-lucide="file-text" class="input-icon-left"></i>
-                                <input type="text" id="expense-note" name="note" placeholder="例如：午餐牛肉麵、計程車..." autocomplete="off">
+                                <input type="text" id="expense-note" name="note" placeholder="例如：午餐牛肉麵、計程車..."
+                                    autocomplete="off">
                             </div>
                         </div>
 
@@ -201,4 +207,5 @@
     <script src="data.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
